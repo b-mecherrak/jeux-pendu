@@ -1,0 +1,46 @@
+<main>
+    <div class="container">
+        <h1 class="label label-primary">Jeu du pendu</h1>
+        <h3 class="label label-primary"> Nombre de tentatives : {{app.nbCurrentFailure}} / {{app.maximumAllowedFailure}} </h3>
+        <div class="row" >
+            <div class="col-md-6">
+            
+            	<div>
+	                <div class="form-group">
+	    					<input type="text" class="form-control" ng-model="app.pseudo" placeholder="pseudo">
+	  				</div>
+	  				<button  ng-click="app.getRandomWordFromPseudo()" type="submit" class="btn btn-primary">generate</button>
+  				</div>
+  				<br>	
+  				<br>
+  				<br>
+                <div class="alphabet">
+                    <button ng-repeat="ll  in app.letters track by  $index " type="button" class="btn btn-primary alphabet-letter-spacing"> 
+                     {{ ll.show ? ll.letter : '-' }} 
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <div class="alphabet" >
+                    <span ng-repeat="l  in app.alphabet track by  $index " 
+                    type="button" 
+                    class="btn  alphabet-letter-spacing" 
+                    ng-class="l.state ? 'btn-primary' : 'btn-danger'"
+                    ng-click= 'app.disableLetter($index, l.letter)'> 
+                     {{l.letter}} 
+                     </span>
+                </div>
+            </div>
+
+         
+        </div>
+        <br>
+        <br>
+           <div  ng-show="app.isGameOver || app.gameEndStatus == 'win'"  class="alert" 
+
+             ng-class="app.gameEndStatus == 'win' ? 'alert-success' : 'alert-danger'" >
+            		Game Over :  {{ 'You ' + app.gameEndStatus | uppercase}}   word to gess is  {{app.hiddenWord}} 
+    </div>
+  
+            </div>
+</main>
